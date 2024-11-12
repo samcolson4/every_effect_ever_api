@@ -165,10 +165,5 @@ MagicNumbers/NoReturn:
     - '*/test/**/*'
     - test/**/*
 
-Cleo/NoInterpolationInPrompts:
-  Include:
-    - 'app/models/user_prompt/prompts/**/*'
-    - '*/app/models/user_prompt/prompts/**/*'
-
 Style/NumericLiterals:
   MinDigits: 14
