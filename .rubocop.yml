@@ -1,8 +1,174 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-magic_numbers
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+inherit_from: .rubocop_todo.yml
+
+inherit_mode:
+  merge:
+    - Exclude
+
+# This is the configuration used to check the rubocop source code.
+AllCops:
+  TargetRubyVersion: 3.3
+  SuggestExtensions:
+    rubocop-minitest: false
+  NewCops: enable
+
+Layout/LineEndStringConcatenationIndentation:
+  EnforcedStyle: indented
+
+Layout/LineLength:
+  AllowHeredoc: true
+  AllowURI: true
+  Enabled: true
+  # Max: 130
+Metrics/ClassLength:
+  Enabled: false
+  # Max: 150
+Metrics/BlockLength:
+  Enabled: false
+  # Max: 150
+Metrics/ModuleLength:
+  Enabled: false
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+  # WHY - wants us to add `requred_ruby_version` to the gemspecs in our
+  # engines. This means adding another place to bump the ruby version
+  # whenever we upgrade the ruby version the app runs on and that feels
+  # painful
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Layout/LineContinuationLeadingSpace:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Naming/MemoizedInstanceVariableName:
+  EnforcedStyleForLeadingUnderscores: 'optional'
+Naming/VariableNumber:
+  Enabled: false
+Performance/RedundantMerge:
+  Enabled: false
+Rails/HelperInstanceVariable:
+  Enabled: false
+Rails/I18nLocaleTexts:
+  Enabled: false
+Rails/Blank:
+  Enabled: false
+Rails/RedundantPresenceValidationOnBelongsTo:
+  Enabled: false
+Rails/DynamicFindBy:
+  Whitelist:
+    - find_by_location
+    - find_by_auto_reply_for_user
+    - find_by_message
+    - find_by_text_for_user
+    - find_by_text_starting_with_for_user
+    - find_by_alias_or_pattern
+Rails/Output:
+  Exclude:
+    - lib/tasks_impl/**/*.rb
+Rails/RefuteMethods:
+  Enabled: false
+Rails/SkipsModelValidations:
+  Exclude:
+    - ./test/**/*
+  AllowedMethods:
+    - touch
+Style/AsciiComments:
+  Enabled: false
+Style/CommentAnnotation:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/HashSyntax:
+  EnforcedShorthandSyntax: either
+Style/Lambda:
+  Enabled: false
+Style/ModuleFunction:
+  Enabled: false
+Style/MultilineBlockChain:
+  Enabled: false
+Style/MultilineMemoization:
+  Enabled: false
+Style/ParallelAssignment:
+  Enabled: false
+Style/RescueStandardError:
+  Enabled: false
+Style/RedundantConstantBase:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: false
+Style/TrailingCommaInArguments:
+  Enabled: true
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInArrayLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInBlockArgs:
+  Enabled: true
+Style/TrailingCommaInHashLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: consistent_comma
+Style/YodaExpression:
+  Enabled: false
+Lint/TrailingCommaInAttributeDeclaration:
+  Enabled: true
+Lint/MissingSuper:
+  Enabled: false
+
+# New cops from rubocop-performance
+Performance/Count:
+  Enabled: false
+Performance/Detect:
+  Enabled: false
+
+MagicNumbers/NoArgument:
+  Enabled: true
+  Exclude:
+    - '*/test/**/*'
+    - test/**/*
+  IgnoredMethods:
+    - '[]'
+    - head
+    - times
+    - assert_response
+    - first
+    - last
+    - take
+    - at_least
+    - in_groups_of
+  PermittedValues:
+    - -1
+    - 0
+    - 1
+MagicNumbers/NoAssignment:
+  Enabled: true
+  Exclude:
+    - '*/test/**/*'
+    - test/**/*
+
+MagicNumbers/NoDefault:
+  Enabled: true
+  Exclude:
+    - '*/test/**/*'
+    - test/**/*
+MagicNumbers/NoReturn:
+  Enabled: true
+  Exclude:
+    - '*/test/**/*'
+    - test/**/*
+
+Cleo/NoInterpolationInPrompts:
+  Include:
+    - 'app/models/user_prompt/prompts/**/*'
+    - '*/app/models/user_prompt/prompts/**/*'
+
+Style/NumericLiterals:
+  MinDigits: 14
