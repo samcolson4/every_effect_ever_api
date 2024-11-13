@@ -2,7 +2,7 @@ module Api
   module V1
     class EffectsUnitController < ApplicationController
       def index
-        render json: EffectUnit.all
+        render jsonapi: EffectUnit.all, class: { EffectUnit: SerializableEffectUnit }
       end
     end
   end

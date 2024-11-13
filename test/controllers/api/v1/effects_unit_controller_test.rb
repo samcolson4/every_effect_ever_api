@@ -5,8 +5,9 @@ class EffectsUnitControllerTest < ActionDispatch::IntegrationTest
     get api_v1_effects_unit_index_url
 
     assert_response :success
+    response_body = JSON.parse(response.parsed_body)
 
     # TODO
-    # set up the json_response to a) work b) use json_api
+    # Add a factory to create an effect unit in the DB
   end
 end
