@@ -3,7 +3,7 @@ require 'test_helper'
 class EffectsUnitControllerTest < ActionDispatch::IntegrationTest
   test '#index - gets all effects units' do
     unit_a = create(:effect_unit)
-    unit_b = create(:effect_unit, name: 'Dimension C', format: 'rack_unit', main_image_link: nil)
+    unit_b = create(:effect_unit, name: 'Dimension C', format: 'rack', main_image_link: nil)
 
     get api_v1_effects_unit_index_url
 
