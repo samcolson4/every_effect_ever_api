@@ -3,8 +3,6 @@ require:
   - rubocop-performance
   - rubocop-magic_numbers
 
-inherit_from: .rubocop_todo.yml
-
 inherit_mode:
   merge:
     - Exclude

@@ -8,9 +8,9 @@ module Api
       def show
         effect_unit = EffectUnit.find(params['id'])
 
-        if effect_unit.present?
-          render jsonapi: effect_unit, class: { EffectUnit: SerializableEffectUnit }
-        end
+        return unless effect_unit.present?
+
+        render jsonapi: effect_unit, class: { EffectUnit: SerializableEffectUnit }
       end
     end
   end
