@@ -42,4 +42,16 @@ class EffectsUnitControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :not_found
   end
+
+  test '#create - adds a new object to the database' do
+    post api_v1_effects_unit_index_url(name: 'Tensor', format: 'pedal')
+
+    assert_response :success
+
+    json_response = JSON.parse(response.parsed_body)
+
+    unit_json = json_response['data']['attributes']
+    assert_equal 'Tensor', unit_json['name']
+    assert_equal 'pedal', unit_json['format']
+  end
 end
